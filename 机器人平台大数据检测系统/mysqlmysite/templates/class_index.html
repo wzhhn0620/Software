@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/class_css/index.css" />
+    <script>
+      var data = {
+        year: [
+          {{robot01.0}},{{robot01.1}},{{robot01.2}},
+          {{robot02.0}},{{robot02.1}},{{robot02.2}},
+          {{robot03.0}},{{robot03.1}},{{robot03.2}},
+          {{robot04.0}},{{robot04.1}},{{robot04.2}},
+          {{robot05.0}},{{robot05.1}},{{robot05.2}},
+          {{robot06.0}},{{robot06.1}},{{robot06.2}},
+          {{robot07.0}},{{robot07.1}},{{robot07.2}},
+          {{robot08.0}},{{robot08.1}},{{robot08.2}},
+          {{robot09.0}},{{robot09.1}},{{robot09.2}},
+          {{robot0a.0}},{{robot0a.1}},{{robot0a.2}},
+          {{robot0b.0}},{{robot0b.1}},{{robot0b.2}},
+        ]
+      };
+      xtime = {
+        xtemptime : [
+          {{xtime.1}},
+        ]
+      };
+
+      setInterval(function () {
+	//获取数据
+		//ajax轮询获取
+              $.ajax({
+              type:"POST",
+              url:"../edit_class/",
+              data:{
+                  "robot_id":{{robot_id}},
+                  "pwd":"123456789",
+              },
+              dataType:"json",
+              success:function(receive_data){
+                  // var GetData=eval('(' + receive_data + ')');;
+
+                  data.year[0]=receive_data.robot01[0];data.year[1]=receive_data.robot01[1];data.year[2]=receive_data.robot01[2];
+                  data.year[3]=receive_data.robot02[0];data.year[4]=receive_data.robot02[1];data.year[5]=receive_data.robot02[2];
+                  data.year[6]=receive_data.robot03[0];data.year[7]=receive_data.robot03[1];data.year[8]=receive_data.robot03[2];
+                  data.year[9]=receive_data.robot04[0];data.year[10]=receive_data.robot04[1];data.year[11]=receive_data.robot04[2];
+                  data.year[12]=receive_data.robot05[0];data.year[13]=receive_data.robot05[1];data.year[14]=receive_data.robot05[2];
+                  data.year[15]=receive_data.robot06[0];data.year[16]=receive_data.robot06[1];data.year[17]=receive_data.robot06[2];
+                  data.year[18]=receive_data.robot07[0];data.year[19]=receive_data.robot07[1];data.year[20]=receive_data.robot07[2];
+                  data.year[21]=receive_data.robot08[0];data.year[22]=receive_data.robot08[1];data.year[23]=receive_data.robot08[2];
+                  data.year[24]=receive_data.robot09[0];data.year[25]=receive_data.robot09[1];data.year[26]=receive_data.robot09[2];
+                  data.year[27]=receive_data.robot0a[0];data.year[28]=receive_data.robot0a[1];data.year[29]=receive_data.robot0a[2];
+                  data.year[30]=receive_data.robot0b[0];data.year[31]=receive_data.robot0b[1];data.year[32]=receive_data.robot0b[2];
+                  xtime.xtemptime[0]=receive_data.xtime[0];
+                  // 柱状图1模块
+                  (function() {
+                    // 实例化对象
+                    var myChart = echarts.init(document.querySelector(".bar .chart"));
+                    // 指定配置和数据
+                    // (1)准备数据
+                    var colors = ["#3794c0", "#cbebdb","#6dcc32","#aa04ae","#6dcc32","#F8B448","#c0175d","#7eff0a","#0fff06","#aea612","#42c00a"];
+                    var option = {
+                      color: colors,
+                      tooltip: {
+                        // 通过坐标轴来触发
+                        trigger: "axis"
+                      },
+                      // legend: {
+                      //   // 距离容器10%
+                      //   right: "10%",
+                      //   // 修饰图例文字的颜色
+                      //   textStyle: {
+                      //     color: "#4c9bfd"
+                      //   }
+                      //   // 如果series 里面设置了name，此时图例组件的data可以省略
+                      //   // data: ["邮件营销", "联盟广告"]
+                      // },
+                      grid: {
+                        top: "20%",
+                        left: "3%",
+                        right: "4%",
+                        bottom: "3%",
+                        show: true,
+                        borderColor: "#012f4a",
+                        containLabel: true
+                      },
+
+                      xAxis: {
+                        type: "category",
+                        boundaryGap: false,
+                        data: xtime.xtemptime[0],
+                        // 去除刻度
+                        axisTick: {
+                          show: false
+                        },
+                        // 修饰刻度标签的颜色
+                        axisLabel: {
+                          color: "rgba(255,255,255,.7)"
+                        },
+                        // 去除x坐标轴的颜色
+                        axisLine: {
+                          show: false
+                        }
+                      },
+                      yAxis: {
+                        type: "value",
+                        // 去除刻度
+                        axisTick: {
+                          show: false
+                        },
+                        // 修饰刻度标签的颜色
+                        axisLabel: {
+                          color: "rgba(255,255,255,.7)"
+                        },
+                        // 修改y轴分割线的颜色
+                        splitLine: {
+                          lineStyle: {
+                            color: "#012f4a"
+                          }
+                        }
+                      },
+                      series: [
+                        {name: "机器人设备1",type: "line",smooth: true,data: data.year[0]},
+                        {name: "机器人设备2",type: "line",smooth: true,data: data.year[3]},
+                        {name: "机器人设备3",type: "line",smooth: true,data: data.year[6]},
+                        {name: "机器人设备4",type: "line",smooth: true,data: data.year[9]},
+                        {name: "机器人设备5",type: "line",smooth: true,data: data.year[12]},
+                        {name: "机器人设备6",type: "line",smooth: true,data: data.year[15]},
+                        {name: "机器人设备7",type: "line",smooth: true,data: data.year[18]},
+                        {name: "机器人设备8",type: "line",smooth: true,data: data.year[21]},
+                        {name: "机器人设备9",type: "line",smooth: true,data: data.year[24]},
+                        {name: "机器人设备10",type: "line",smooth: true,data: data.year[27]},
+                        {name: "机器人设备11",type: "line",smooth: true,data: data.year[30]},
+                      ]
+                    };
+
+                    // 3. 把配置和数据给实例对象
+                    myChart.setOption(option);
+
+                    // 重新把配置好的新数据给实例对象
+                    myChart.setOption(option);
+                    window.addEventListener("resize", function() {
+                      myChart.resize();
+                    });
+
+                  })();
+                  // 折线图定制
+                  (function() {
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.querySelector(".line .chart"));
+
+                    // (1)准备数据
+                    // var data = {
+                    //   year: [
+                    //     [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
+                    //     [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79]
+                    //   ]
+                    // };
+
+                    // 2. 指定配置和数据
+                    var option = {
+                      color: ["#3794c0", "#cbebdb","#6dcc32","#aa04ae","#6dcc32","#F8B448","#c0175d","#7eff0a","#0fff06","#aea612","#42c00a"],
+                      tooltip: {
+                        // 通过坐标轴来触发
+                        trigger: "axis"
+                      },
+                      // legend: {
+                      //   // 距离容器10%
+                      //   right: "10%",
+                      //   // 修饰图例文字的颜色
+                      //   textStyle: {
+                      //     color: "#4c9bfd"
+                      //   }
+                      //   // 如果series 里面设置了name，此时图例组件的data可以省略
+                      //   // data: ["邮件营销", "联盟广告"]
+                      // },
+                      grid: {
+                        top: "20%",
+                        left: "3%",
+                        right: "4%",
+                        bottom: "3%",
+                        show: true,
+                        borderColor: "#012f4a",
+                        containLabel: true
+                      },
+
+                      xAxis:[
+                          {type: 'category', boundaryGap: false,axisTick: {alignWithLabel: true}, axisTick: {show: false},axisLabel: {color: "rgba(255,255,255,.7)"},data: xtime.xtemptime[0]},
+                          // {type: 'category', boundaryGap: false,axisTick: {alignWithLabel: true}, axisTick: {show: false},axisLabel: {color: "rgba(255,255,255,.7)"},data: xtime.xtemptime[1]},
+                      ],
+                      yAxis: {
+                        type: "value",
+                        // 去除刻度
+                        axisTick: {
+                          show: false
+                        },
+                        // 修饰刻度标签的颜色
+                        axisLabel: {
+                          color: "rgba(255,255,255,.7)"
+                        },
+                        // 修改y轴分割线的颜色
+                        splitLine: {
+                          lineStyle: {
+                            color: "#012f4a"
+                          }
+                        }
+                      },
+                      series: [
+                        {name: "机器人设备1",type: "line",smooth: true,data: data.year[1]},
+                        {name: "机器人设备2",type: "line",smooth: true,data: data.year[4]},
+                        {name: "机器人设备3",type: "line",smooth: true,data: data.year[7]},
+                        {name: "机器人设备4",type: "line",smooth: true,data: data.year[10]},
+                        {name: "机器人设备5",type: "line",smooth: true,data: data.year[13]},
+                        {name: "机器人设备6",type: "line",smooth: true,data: data.year[16]},
+                        {name: "机器人设备7",type: "line",smooth: true,data: data.year[19]},
+                        {name: "机器人设备8",type: "line",smooth: true,data: data.year[22]},
+                        {name: "机器人设备9",type: "line",smooth: true,data: data.year[25]},
+                        {name: "机器人设备10",type: "line",smooth: true,data: data.year[28]},
+                        {name: "机器人设备11",type: "line",smooth: true,data: data.year[31]},
+                      ]
+                    };
+                    // 3. 把配置和数据给实例对象
+                    myChart.setOption(option);
+
+                    // 重新把配置好的新数据给实例对象
+                    myChart.setOption(option);
+                    window.addEventListener("resize", function() {
+                      myChart.resize();
+                    });
+                  })();
+
+                  // 折线图定制
+                  (function() {
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.querySelector(".pie .chart"));
+
+                    option =  {
+                      color: ["#3794c0", "#cbebdb","#6dcc32","#aa04ae","#6dcc32","#F8B448","#c0175d","#7eff0a","#0fff06","#aea612","#42c00a"],
+                      tooltip: {
+                        // 通过坐标轴来触发
+                        trigger: "axis"
+                      },
+                      // legend: {
+                      //   // 距离容器10%
+                      //   right: "10%",
+                      //   // 修饰图例文字的颜色
+                      //   textStyle: {
+                      //     color: "#4c9bfd"
+                      //   }
+                      //   // 如果series 里面设置了name，此时图例组件的data可以省略
+                      //   // data: ["邮件营销", "联盟广告"]
+                      // },
+                      grid: {
+                        top: "20%",
+                        left: "3%",
+                        right: "4%",
+                        bottom: "3%",
+                        show: true,
+                        borderColor: "#012f4a",
+                        containLabel: true
+                      },
+
+                     xAxis:[
+                          {type: 'category',axisLine: {show: false}, boundaryGap: false,axisTick: {alignWithLabel: true}, axisTick: {show: false},axisLabel: {color: "rgba(255,255,255,.7)"},data: xtime.xtemptime[0]},
+                          // {type: 'category',axisLine: {show: false}, boundaryGap: false,axisTick: {alignWithLabel: true}, axisTick: {show: false},axisLabel: {color: "rgba(255,255,255,.7)"},data: xtime.xtemptime[1]},
+                      ],
+                      yAxis: {
+                        type: "value",
+                        // 去除刻度
+                        axisTick: {
+                          show: false
+                        },
+                        // 修饰刻度标签的颜色
+                        axisLabel: {
+                          color: "rgba(255,255,255,.7)"
+                        },
+                        // 修改y轴分割线的颜色
+                        splitLine: {
+                          lineStyle: {
+                            color: "#012f4a"
+                          }
+                        }
+                      },
+                      series: [
+                        {name: "机器人设备1",type: "line",smooth: true,data: data.year[2]},
+                        {name: "机器人设备2",type: "line",smooth: true,data: data.year[5]},
+                        {name: "机器人设备3",type: "line",smooth: true,data: data.year[8]},
+                        {name: "机器人设备4",type: "line",smooth: true,data: data.year[11]},
+                        {name: "机器人设备5",type: "line",smooth: true,data: data.year[14]},
+                        {name: "机器人设备6",type: "line",smooth: true,data: data.year[17]},
+                        {name: "机器人设备7",type: "line",smooth: true,data: data.year[20]},
+                        {name: "机器人设备8",type: "line",smooth: true,data: data.year[23]},
+                        {name: "机器人设备9",type: "line",smooth: true,data: data.year[26]},
+                        {name: "机器人设备10",type: "line",smooth: true,data: data.year[29]},
+                        {name: "机器人设备11",type: "line",smooth: true,data: data.year[32]},
+                      ]
+                    };
+
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+                    window.addEventListener("resize", function() {
+                      myChart.resize();
+                    });
+                  })();
+
+                  $("#max_id").html(receive_data.data_max);
+              },
+              error:function(){
+                  alert("获取数据异常");
+              }
+          });
+          //原始随机数据
+          // var x = (new Date()).getTime(), // 当前时间
+          //     y = Math.random();          // 随机值
+          // series.addPoint([x, y], true, true);
+          // activeLastPointToolip(chart);
+      }, 2000);
+
+    //   $.ajax({
+    //   url: "/ajax_test/",
+    //   type: "POST",
+    //   data: {},
+    //   success: function (data) {
+    //     alert(data)
+    //   }
+    // })
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h1>机器人平台环境大数据检测系统</h1>
+      <div class="showTime">当前时间：2020年3月17-0时54分14秒</div>
+      <script>
+        var t = null;
+        t = setTimeout(time, 1000); //開始运行
+        function time() {
+          clearTimeout(t); //清除定时器
+          dt = new Date();
+          var y = dt.getFullYear();
+          var mt = dt.getMonth() + 1;
+          var day = dt.getDate();
+          var h = dt.getHours(); //获取时
+          var m = dt.getMinutes(); //获取分
+          var s = dt.getSeconds(); //获取秒
+          document.querySelector(".showTime").innerHTML =
+            "当前时间：" +
+            y +
+            "年" +
+            mt +
+            "月" +
+            day +
+            "-" +
+            h +
+            "时" +
+            m +
+            "分" +
+            s +
+            "秒";
+          t = setTimeout(time, 1000); //设定定时器，循环运行
+        }
+      </script>
+    </header>
+    <section class="mainbox">
+      <div class="column">
+        <div class="panel bar">
+          <h2>
+            温度显示
+          </h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel line">
+          <h2>湿度显示</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel pie">
+          <h2>光照度显示</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="no">
+          <div class="no-hd">
+            <ul>
+              <li id="max_id">{{data_max}}</li>
+              <li>{{num_robot}}</li>
+            </ul>
+          </div>
+          <div class="no-bd">
+            <ul>
+              <li>当前记录次数</li>
+              <li>当前节点机器人数目</li>
+            </ul>
+          </div>
+        </div>
+        <div class="map">
+          <div class="chart"></div>
+          <div class="map1"></div>
+          <div class="map2"></div>
+          <div class="map3"></div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="panel bar1">
+          <h2>用户显示</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel line1">
+          <h2>节点机器人显示</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel pie1">
+          <h2>机器人运行情况</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+      </div>
+    </section>
+    <script src="/static/js/class_flexible.js"></script>
+    <script src="/static/js/class_jquery.js"></script>
+    <script src="/static/js/class_echarts.min.js"></script>
+    <script src="/static/js/index3.js"></script>
+    <script src="/static/js/class_china.js"></script>
+    <script src="/static/js/class_myMap.js"></script>
+    <script type="text/javascript" src="/static/js/index3.js"></script>
+  </body>
+</html>

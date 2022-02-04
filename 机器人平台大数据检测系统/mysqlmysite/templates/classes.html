@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+         body{
+            margin-top: 80px;
+            background:url(/static/images/s3.png);
+             background-size:100%;
+            font-family: Arial, Helvetica, sans-serif
+            font-size: 16px;
+        }
+        ul,h1,h2,h3,p{
+            margin: 0;
+        }
+        ul{
+            list-style: none;
+            padding-left: 0;
+        }
+        a{
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color:#f5f5f5;
+        }
+        /* 头部导航栏 */
+        #head{
+            width: 100%;
+            min-width: 1200px;
+            height: 44px;
+            background-color: rgba(0, 0, 0, 0.404);
+        }
+        nav{
+            width: 1200px;
+            height: 100%;
+            margin:0 auto;
+        }
+        nav>h1{
+            float: left;
+            width: 32px;
+            height: 100%;
+        }
+        /*nav>h1>a{*/
+        /*    display: block;*/
+        /*    width: 100%;*/
+        /*    height: 100%;*/
+        /*    background: url(images/favicon.ico) no-repeat center;*/
+        /*    text-indent: -999px;*/
+        /*}*/
+        nav>.nav-list{
+            float:right;
+            width: 800px;
+            height: 100%;
+        }
+        .nav-list li{
+            float: left;
+            width: 148px;
+            height: 100%;
+            line-height: 44px;
+            text-align: center;
+        }
+        .nav-list li+li{
+            margin-left: 15px;
+        }
+        .nav-list li>a:hover{
+            color: rgb(129, 167, 218);
+        }
+        .nav-list li:hover{
+            background-color: #555;
+        }
+        /* 头部导航栏结束 */
+        /* 主体部分 */
+        #main{
+            width: 80%;
+            height: 380px;
+            background-color: rgba(0,0,0,.3);
+            margin:150px auto;
+            border-radius: 10px;
+            border:1px solid #abcdab;
+        }
+        /* 头像 */
+        #main>.head-pic{
+            width: 50px;
+            height: 80px;
+            border-radius: 50%;
+            margin:20px auto 0;
+            overflow: hidden;
+            background: url() no-repeat center;
+            transition: .8s linear;
+        }
+        .head-pic:hover{
+            transform: rotate(360deg);
+        }
+        #main>h2,p{
+            color: #f5f5f5;
+            text-align: center;
+        }
+        #main>h2{
+            font-size: 36px;
+            line-height: 80px;
+            font-family: '楷体';
+        }
+        #main>p{
+            font-size: 24px;
+            line-height: 40px;
+            color: #c0175d;
+        }
+        #main>.list{
+            width: 88%;
+            height: 40px;
+            margin:2.5em auto;
+            border-radius: 8px;
+        }
+        .list>ul>li{
+            float: left;
+            width: 32%;
+            height: 100%;
+            background-color:#444;
+            opacity: .8;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 40px;
+        }
+        .list>ul>li+li{
+            margin-left:1em;;
+        }
+        .list a{
+            color:violet;
+        }
+        .list a:hover{
+            color:rgb(207, 172, 172);
+        }
+    </style>
+<!--    <div id="head">-->
+<!--        <nav>-->
+<!--            <h1>-->
+<!--                <a href="">可我不吃肉</a>-->
+<!--            </h1>-->
+<!--            <div class="nav-list">-->
+<!--                <ul>-->
+<!--                    <li>-->
+<!--                        <a href="">主页</a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="">QQ</a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="">微博</a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="">与我联系</a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="">更多</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </nav>-->
+<!--    </div>-->
+</head>
+<body>
+<!--    <h1>班级列表</h1>-->
+<!--    <div>-->
+<!--        <a href="../add_class/">添加</a>-->
+<!--    </div>-->
+<!--    <table border="1">-->
+<!--        <thead>-->
+<!--            <tr>-->
+<!--                <th>ID</th>-->
+<!--                <th>班级名称</th>-->
+<!--                <th>操作</th>-->
+<!--            </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--            {% for row in class_list %}-->
+<!--                <tr>-->
+<!--                    <td>{{ row.id }}</td>-->
+<!--                    <td>{{ row.title }}</td>-->
+<!--                    <td><a href="../del_class/?nid={{ row.id }}">删除</a>|-->
+<!--                        <a href="../edit_class/?nid={{ row.id }}">编辑</a></td>-->
+<!--                </tr>-->
+<!--            {% endfor %}-->
+<!--        </tbody>-->
+<!--    </table>-->
+    <div id="main">
+        <div class="head-pic"></div>
+        <h2>Root用户管理界面</h2>
+        <p>机器人平台大数据监测系统</p>
+        <div class="list">
+            <ul>
+                <li>
+                    <a href="../class/?token={{token}}&robotid=1">Robot1</a>
+                </li>
+                <li>
+                    <a href="../class/?token={{token}}&robotid=2">Robot2</a>
+                </li>
+                <li>
+                    <a href="../class/?token={{token}}&robotid=3">Robot3</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

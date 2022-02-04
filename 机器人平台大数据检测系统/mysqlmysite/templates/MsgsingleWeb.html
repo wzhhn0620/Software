@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>云端留言板（1）首页</title>
+</head>
+<body>
+<!--    <h1>提交留言功能区</h1>-->
+<!--    <form action="/msggate/" method="post">-->
+<!--        {% csrf_token %}-->
+<!--        发送方 <input type="text" name="userA" /><br>-->
+<!--        接收方 <input type="text" name="userB" /><br>-->
+<!--        消息文 <input type="text" name="msg" /><br>-->
+<!--        <input type="submit" value="留言提交" />-->
+<!--    </form>-->
+
+    <h1>获取数据功能区</h1>
+<!--        <form action="/msggate/" method="get">-->
+<!--            获取数据 <input type="text" name="userC" /> <br>-->
+<!--            <input type="submit" value="数据获取" />-->
+<!--        </form>-->
+        <table border="1">
+            <thead>
+                <th>数据id</th>
+                <th>机器人id</th>
+                <th>温度值</th>
+                <th>湿度值</th>
+                <th>光照度</th>
+                <th>记录时间</th>
+            </thead>
+            <br>
+            <tbody>
+                {% for line in data_list %}
+                <tr>
+                    <td>{{ line.id }}</td>
+                    <td align="center">{{ line.robot_id }}</td>
+                    <td>{{ line.temp }}</td>
+                    <td>{{ line.Humidity }}</td>
+                    <td>{{ line.Lux }}</td>
+                    <td>{{ line.time }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</body>
+</html>

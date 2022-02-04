@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/index.css" />
+    <script>
+      data = {
+        year: [
+          {{robot1.0}},
+          {{robot2.0}},
+          {{robot3.0}},
+          {{robot1.1}},
+          {{robot2.1}},
+          {{robot3.1}},
+          {{robot1.2}},
+          {{robot2.2}},
+          {{robot3.2}},
+          [ {value: 1048, name: '机器人wzh'},
+            {value: 735, name: '机器人wrd'},
+            {value: 580, name: '机器人wy'}],
+        ],
+      };
+      xtime = {
+        xtemptime : [
+          {{robot1.3}},
+        ]
+      }
+
+
+      setInterval(function () {
+	//获取数据
+		//ajax轮询获取
+              $.ajax({
+              type:"POST",
+              url:"../edit_data/",
+              data:{
+                  "pwd":"123456789"
+              },
+              dataType:"json",
+              success:function(receive_data){
+                  // var GetData=eval('(' + receive_data + ')');;
+
+                  data.year[0]=receive_data.robot1_temp;
+                  data.year[1]=receive_data.robot2_temp;
+                  data.year[2]=receive_data.robot3_temp;
+                  data.year[3]=receive_data.robot1_Humidity;
+                  data.year[4]=receive_data.robot2_Humidity;
+                  data.year[5]=receive_data.robot3_Humidity;
+                  data.year[6]=receive_data.robot1_Lux;
+                  data.year[7]=receive_data.robot2_Lux;
+                  data.year[8]=receive_data.robot3_Lux;
+                  xtime.xtemptime[0]=receive_data.robot_t;
+                  // data.year[9]=receive_data.robot_user;
+                  // alert(data.year[9]);
+                  // 柱状图1模块
+                  (function() {
+                  // 实例化对象
+                  var myChart = echarts.init(document.querySelector(".bar .chart"));
+                  // 指定配置和数据
+                  // (1)准备数据
+
+
+                  // 2. 指定配置和数据
+                  var option = {
+                    color: ["#00f2f1", "#ed3f35","#F8B448"],
+                    tooltip: {
+                      // 通过坐标轴来触发
+                      trigger: "axis"
+                    },
+                    legend: {
+                      // 距离容器10%
+                      right: "10%",
+                      // 修饰图例文字的颜色
+                      textStyle: {
+                        color: "#4c9bfd"
+                      }
+                      // 如果series 里面设置了name，此时图例组件的data可以省略
+                      // data: ["邮件营销", "联盟广告"]
+                    },
+                    grid: {
+                      top: "20%",
+                      left: "3%",
+                      right: "4%",
+                      bottom: "3%",
+                      show: true,
+                      borderColor: "#012f4a",
+                      containLabel: true
+                    },
+
+                    xAxis: {
+                      type: "category",
+                      boundaryGap: false,
+                      data: xtime.xtemptime[0],
+                      // 去除刻度
+                      axisTick: {
+                        show: false
+                      },
+                      // 修饰刻度标签的颜色
+                      axisLabel: {
+                        color: "rgba(255,255,255,.7)"
+                      },
+                      // 去除x坐标轴的颜色
+                      axisLine: {
+                        show: false
+                      }
+                    },
+                    yAxis: {
+                      type: "value",
+                      // 去除刻度
+                      axisTick: {
+                        show: false
+                      },
+                      // 修饰刻度标签的颜色
+                      axisLabel: {
+                        color: "rgba(255,255,255,.7)"
+                      },
+                      // 修改y轴分割线的颜色
+                      splitLine: {
+                        lineStyle: {
+                          color: "#012f4a"
+                        }
+                      }
+                    },
+                    series: [
+                      {
+                        name: "机器人1",
+                        type: "line",
+                        // stack: "总量",
+                        // 是否让线条圆滑显示
+                        smooth: true,
+                        data: data.year[0]
+                      },
+                      {
+                        name: "机器人2",
+                        type: "line",
+                        // stack: "总量",
+                        smooth: true,
+                        data: data.year[1]
+                      },
+                      {
+                        name: "机器人3",
+                        type: "line",
+                        // stack: "总量",
+                        smooth: true,
+                        data: data.year[2]
+                      }
+                    ]
+                  };
+                  // 3. 把配置和数据给实例对象
+                  myChart.setOption(option);
+
+                  // 重新把配置好的新数据给实例对象
+                  myChart.setOption(option);
+                  window.addEventListener("resize", function() {
+                    myChart.resize();
+                  });
+
+                })();
+                  // 折线图定制
+                  // 折线图定制
+                  (function() {
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.querySelector(".line .chart"));
+
+                    // (1)准备数据
+                    // var data = {
+                    //   year: [
+                    //     [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
+                    //     [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79]
+                    //   ]
+                    // };
+
+                    // 2. 指定配置和数据
+                    var option = {
+                      color: ["#00f2f1", "#ed3f35","#F8B448"],
+                      tooltip: {
+                        // 通过坐标轴来触发
+                        trigger: "axis"
+                      },
+                      legend: {
+                        // 距离容器10%
+                        right: "10%",
+                        // 修饰图例文字的颜色
+                        textStyle: {
+                          color: "#4c9bfd"
+                        }
+                        // 如果series 里面设置了name，此时图例组件的data可以省略
+                        // data: ["邮件营销", "联盟广告"]
+                      },
+                      grid: {
+                        top: "20%",
+                        left: "3%",
+                        right: "4%",
+                        bottom: "3%",
+                        show: true,
+                        borderColor: "#012f4a",
+                        containLabel: true
+                      },
+
+                      xAxis: {
+                        type: "category",
+                        boundaryGap: false,
+                        data: xtime.xtemptime[0],
+                        // 去除刻度
+                        axisTick: {
+                          show: false
+                        },
+                        // 修饰刻度标签的颜色
+                        axisLabel: {
+                          color: "rgba(255,255,255,.7)"
+                        },
+                        // 去除x坐标轴的颜色
+                        axisLine: {
+                          show: false
+                        }
+                      },
+                      yAxis: {
+                        type: "value",
+                        // 去除刻度
+                        axisTick: {
+                          show: false
+                        },
+                        // 修饰刻度标签的颜色
+                        axisLabel: {
+                          color: "rgba(255,255,255,.7)"
+                        },
+                        // 修改y轴分割线的颜色
+                        splitLine: {
+                          lineStyle: {
+                            color: "#012f4a"
+                          }
+                        }
+                      },
+                      series: [
+                        {
+                          name: "机器人1",
+                          type: "line",
+                          // stack: "总量",
+                          // 是否让线条圆滑显示
+                          smooth: true,
+                          data: data.year[3]
+                        },
+                        {
+                          name: "机器人2",
+                          type: "line",
+                          // stack: "总量",
+                          smooth: true,
+                          data: data.year[4]
+                        },
+                        {
+                          name: "机器人3",
+                          type: "line",
+                          // stack: "总量",
+                          smooth: true,
+                          data: data.year[5]
+                        }
+                      ]
+                    };
+                    // 3. 把配置和数据给实例对象
+                    myChart.setOption(option);
+
+                    // 重新把配置好的新数据给实例对象
+                    myChart.setOption(option);
+                    window.addEventListener("resize", function() {
+                      myChart.resize();
+                    });
+                  })();
+
+                  // 折线图定制
+                  (function() {
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.querySelector(".pie .chart"));
+
+                    option = {
+                      tooltip: {
+                        trigger: "axis",
+                        axisPointer: {
+                          lineStyle: {
+                            color: "#dddc6b"
+                          }
+                        }
+                      },
+                      legend: {
+                        top: "0%",
+                        textStyle: {
+                          color: "rgba(255,255,255,.5)",
+                          fontSize: "12"
+                        }
+                      },
+                      grid: {
+                        left: "10",
+                        top: "30",
+                        right: "10",
+                        bottom: "10",
+                        containLabel: true
+                      },
+
+                      xAxis: [
+                        {
+                          type: "category",
+                          boundaryGap: false,
+                          axisLabel: {
+                            textStyle: {
+                              color: "rgba(255,255,255,.6)",
+                              fontSize: 12
+                            }
+                          },
+                          axisLine: {
+                            lineStyle: {
+                              color: "rgba(255,255,255,.2)"
+                            }
+                          },
+
+                          data:xtime.xtemptime[0],
+                        },
+                        {
+                          axisPointer: { show: false },
+                          axisLine: { show: false },
+                          position: "bottom",
+                          offset: 20
+                        }
+                      ],
+
+                      yAxis: [
+                        {
+                          type: "value",
+                          axisTick: { show: false },
+                          axisLine: {
+                            lineStyle: {
+                              color: "rgba(255,255,255,.1)"
+                            }
+                          },
+                          axisLabel: {
+                            textStyle: {
+                              color: "rgba(255,255,255,.6)",
+                              fontSize: 12
+                            }
+                          },
+
+                          splitLine: {
+                            lineStyle: {
+                              color: "rgba(255,255,255,.1)"
+                            }
+                          }
+                        }
+                      ],
+
+                      series: [
+                        {
+                          name: "机器人1",
+                          type: "line",
+                          smooth: true,
+                          symbol: "circle",
+                          symbolSize: 5,
+                          showSymbol: false,
+                          lineStyle: {
+                            normal: {
+                              color: "#0184d5",
+                              width: 2
+                            }
+                          },
+                          areaStyle: {
+                            normal: {
+                              color: new echarts.graphic.LinearGradient(
+                                0,
+                                0,
+                                0,
+                                1,
+                                [
+                                  {
+                                    offset: 0,
+                                    color: "rgba(1, 132, 213, 0.4)"
+                                  },
+                                  {
+                                    offset: 0.8,
+                                    color: "rgba(1, 132, 213, 0.1)"
+                                  }
+                                ],
+                                false
+                              ),
+                              shadowColor: "rgba(0, 0, 0, 0.1)"
+                            }
+                          },
+                          itemStyle: {
+                            normal: {
+                              color: "#0184d5",
+                              borderColor: "rgba(221, 220, 107, .1)",
+                              borderWidth: 12
+                            }
+                          },
+                          data: data.year[6]
+                        },
+                        {
+                          name: "机器人2",
+                          type: "line",
+                          smooth: true,
+                          symbol: "circle",
+                          symbolSize: 5,
+                          showSymbol: false,
+                          lineStyle: {
+                            normal: {
+                              color: "#00d887",
+                              width: 2
+                            }
+                          },
+                          areaStyle: {
+                            normal: {
+                              color: new echarts.graphic.LinearGradient(
+                                0,
+                                0,
+                                0,
+                                1,
+                                [
+                                  {
+                                    offset: 0,
+                                    color: "rgba(0, 216, 135, 0.4)"
+                                  },
+                                  {
+                                    offset: 0.8,
+                                    color: "rgba(0, 216, 135, 0.1)"
+                                  }
+                                ],
+                                false
+                              ),
+                              shadowColor: "rgba(0, 0, 0, 0.1)"
+                            }
+                          },
+                          itemStyle: {
+                            normal: {
+                              color: "#00d887",
+                              borderColor: "rgba(221, 220, 107, .1)",
+                              borderWidth: 12
+                            }
+                          },
+                          data: data.year[7]
+                        },
+                        {
+                          name: "机器人3",
+                          type: "line",
+                          smooth: true,
+                          symbol: "circle",
+                          symbolSize: 5,
+                          showSymbol: false,
+                          lineStyle: {
+                            normal: {
+                              color: "#ed3f35",
+                              width: 2
+                            }
+                          },
+                          areaStyle: {
+                            normal: {
+                              color: new echarts.graphic.LinearGradient(
+                                0,
+                                0,
+                                0,
+                                1,
+                                [
+                                  {
+                                    offset: 0,
+                                    color: "rgba(205, 38, 38, 0.4)"
+                                  },
+                                  {
+                                    offset: 0.8,
+                                    color: "rgba(205, 38, 38, 0.1)"
+                                  }
+                                ],
+                                false
+                              ),
+                              shadowColor: "rgba(0, 0, 0, 0.1)"
+                            }
+                          },
+                          itemStyle: {
+                            normal: {
+                              color: "#ed3f35",
+                              borderColor: "rgba(221, 220, 107, .1)",
+                              borderWidth: 12
+                            }
+                          },
+                          data: data.year[8]
+                        }
+                      ]
+                    };
+
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+                    window.addEventListener("resize", function() {
+                      myChart.resize();
+                    });
+                  })();
+
+                  (function() {
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.querySelector(".line1 .chart"));
+
+                   option = {
+                         color: [
+                        "#006cff",
+                        "#60cda0",
+                        "#ed8884",
+                        "#ff9f7f",
+                        "#0096ff",
+                        "#9fe6b8",
+                        "#32c5e9",
+                        "#1d9dff"
+                      ],
+                      tooltip: {
+                          trigger: 'item'
+                      },
+                      legend: {
+                          top: '90%',
+                          left: 'center',
+                          textStyle: {
+                          color: "rgba(255,255,255,.5)",
+                          fontSize: "12"
+                        }
+                      },
+                      series: [
+                          {
+                              name: '访问来源',
+                              type: 'pie',
+                              radius: ['40%', '70%'],
+                              avoidLabelOverlap: false,
+                              itemStyle: {
+                                  borderRadius: 10,
+                                  borderColor: '#fff',
+                                  borderWidth: 2
+                              },
+                              label: {
+                                  show: false,
+                                  position: 'center'
+                              },
+                              emphasis: {
+                                  label: {
+                                      show: true,
+                                      fontSize: '15',
+                                      fontWeight: 'bold'
+                                  }
+                              },
+                              labelLine: {
+                                  show: false
+                              },
+                              data: data.year[9]
+                          }
+                      ]
+                  };
+
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+                    window.addEventListener("resize", function() {
+                      myChart.resize();
+                    });
+                  })();
+
+                  $("#max_id").html(receive_data.data_max);
+              },
+              error:function(){
+                  alert("获取数据异常");
+              }
+          });
+      }, 2000);
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h1>机器人平台环境大数据检测系统</h1>
+      <div class="showTime">当前时间：2020年3月17-0时54分14秒</div>
+      <script>
+        var t = null;
+        t = setTimeout(time, 1000); //開始运行
+        function time() {
+          clearTimeout(t); //清除定时器
+          dt = new Date();
+          var y = dt.getFullYear();
+          var mt = dt.getMonth() + 1;
+          var day = dt.getDate();
+          var h = dt.getHours(); //获取时
+          var m = dt.getMinutes(); //获取分
+          var s = dt.getSeconds(); //获取秒
+          document.querySelector(".showTime").innerHTML =
+            "当前时间：" +
+            y +
+            "年" +
+            mt +
+            "月" +
+            day +
+            "-" +
+            h +
+            "时" +
+            m +
+            "分" +
+            s +
+            "秒";
+          t = setTimeout(time, 1000); //设定定时器，循环运行
+        }
+      </script>
+    </header>
+    <section class="mainbox">
+      <div class="column">
+        <div class="panel bar">
+          <h2>
+            温度显示
+          </h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel line">
+          <h2>湿度显示</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel pie">
+          <h2>光照度显示</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="no">
+          <div class="no-hd">
+            <ul>
+              <li id="max_id">{{data_max}}</li>
+              <li>{{num_robot}}</li>
+            </ul>
+          </div>
+          <div class="no-bd">
+            <ul>
+              <li>当前记录次数</li>
+              <li>当前节点机器人数目</li>
+            </ul>
+          </div>
+        </div>
+        <div class="map">
+          <div class="chart"></div>
+          <div class="map1"></div>
+          <div class="map2"></div>
+          <div class="map3"></div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="panel bar1">
+          <h2>用户显示</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel line1">
+          <h2>节点机器人显示</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel pie1">
+          <h2>机器人运行情况</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+      </div>
+    </section>
+    <script src="/static/js/flexible.js"></script>
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/echarts.min.js"></script>
+    <script src="/static/js/index.js"></script>
+    <script src="/static/js/china.js"></script>
+    <script src="/static/js/myMap.js"></script>
+    <script type="text/javascript" src="/static/js/index.js"></script>
+  </body>
+</html>
