@@ -122,9 +122,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'static'),
-    os.path.join(BASE_DIR,'static/login_css'),
+    os.path.join(BASE_DIR,'static/userlogin_css'),
     os.path.join(BASE_DIR,'static/login_js'),
-    os.path.join(BASE_DIR,'static/login_img'),
+    os.path.join(BASE_DIR,'static/userlogin_img'),
     os.path.join(BASE_DIR,'static/css'),
     os.path.join(BASE_DIR,'static/font'),
     os.path.join(BASE_DIR,'static/images'),
