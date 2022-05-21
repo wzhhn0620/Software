@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deposit</title>
+    <link rel="stylesheet" type="text/css" href="/static/administration_css/administration.css" />
+</head>
+<body>
+<!--修改密码模态对话框-->
+<div id="editpwd" class="modal hide">
+<!--        /*form表单提交页面会刷新*/-->
+    <h3 class="h3_box"><a onClick="hidemodal();">Change Password (ESC)</a></h3>
+    <input id="changeId" type="text" name="changeId" style="display:none" />
+    <div class="input_outer">
+        <input id="changeName" style="background:transparent;border:none;outline:none;" type="text" name="changeName"/>
+    </div>
+    <div class="input_outer">
+        <input id="changepwd" style="background:transparent;border:none;outline:none;" type="text" name="changepwd"/>
+    </div>
+        <span id="errorchangemsg" style="margin:auto; color:red;"></span>
+    <div class="input_button">
+        <input type="button" value="提交" style="width:100%;background:transparent;border:none;outline:none;" onclick="AjaxchangeSend();"/>
+    </div>
+
+</div>
+
+<div id="adduser" class="modal hide">
+<!--        /*form表单提交页面会刷新*/-->
+    <h3 class="h3_box"><a onClick="hidemodal();">Add User (ESC)</a></h3>
+
+    <div class="input_outer">
+        <input id="addName" style="background:transparent;border:none;outline:none;" type="text" name="addName"/>
+        <label for="text" style="color:#000">UserName</label>
+    </div>
+    <div class="input_outer">
+        <input id="addpwd" style="background:transparent;border:none;outline:none;" type="text" name="addpwd"/>
+        <label for="text" style="color:#000">UserPwd</label>
+    </div>
+        <span id="erroraddmsg" style="margin:auto; color:red;"></span>
+    <div class="input_button">
+        <input type="button" value="提交" style="width:100%;background:transparent;border:none;outline:none;" onclick="AjaxaddSend();"/>
+    </div>
+
+</div>
+
+<!--遮罩层-->
+<div id="shadow" class="shadow hide"></div>
+
+    <a href="../" style="text-decoration: none;"><div class="h1_box">Select Action (ESC)</div></a>
+    <div class="logo_box_1">
+        <div class="h3_box">
+            <h3>Users Admin</h3>
+        </div>
+        <div class="table_box">
+            <table border="1" style="width: 100%;color: #000000;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>姓名</th>
+                            <th>密码</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for root in root_list %}
+                            <tr>
+                                <td>{{ root.u_id }}</td>
+                                <td>{{ root.name }}</td>
+                                <td>{{ root.pwd }}</td>
+                                <td><a onclick="add_user(this)">增加</a>|
+                                    <a onClick="pwd_edit(this)">修改密码</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tbody>
+                        {% for row in users_list %}
+                            <tr>
+                                <td>{{ row.u_id }}</td>
+                                <td>{{ row.name }}</td>
+                                <td>{{ row.pwd }}</td>
+                                <td><a href="del_user/?nid={{ row.u_id }}&token={{token}}">删除</a>|
+                                    <a onClick="pwd_edit(this)">修改密码</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="logo_box_2">
+        <div class="h3_box">
+            <h3>Component Admin</h3>
+        </div>
+        <div class="table_box">
+            <table border="1" style="width: 100%;color: #000000;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>器件名</th>
+                            <th>库存</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cpn in components_list %}
+                            <tr>
+                                <td>{{ cpn.c_id }}</td>
+                                <td>{{ cpn.name }}</td>
+                                <td>{{ cpn.inventory }}</td>
+                                <td><a href="./del_component/?nid={{ cpn.c_id }}&token={{token}}">删除</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+</div>
+<script src="/static/cite/jquery/jquery.js"></script>
+<script>
+        function pwd_edit(ths){
+            document.getElementById('shadow').classList.remove('hide');
+            document.getElementById('editpwd').classList.remove('hide');
+
+            var v = $(ths).parent().prevAll();
+            var v_pwd = $(v[0]).text();
+            var v_name = $(v[1]).text();
+            var v_ID = $(v[2]).text();
+
+            $('#changepwd').val(v_pwd);
+            $('#changeName').val(v_name);
+            $('#changeId').val(v_ID);
+        }
+
+        function add_user(ths){
+            document.getElementById('shadow').classList.remove('hide');
+            document.getElementById('adduser').classList.remove('hide');
+        }
+
+        function hidemodal(){
+            document.getElementById('shadow').classList.add('hide');
+            document.getElementById('editpwd').classList.add('hide');
+            document.getElementById('adduser').classList.add('hide');
+        }
+
+        function AjaxchangeSend() {
+            $.ajax({
+                url: "./?token={{token}}&action=0",    //链接容易出错导致不能出现预期结果
+                type: "POST",
+                data: {
+                    'change_id':$('#changeId').val(),
+                    'change_name':$('#changeName').val(),
+                    'change_pwd':$('#changepwd').val()
+                },
+                success:function(data){
+                    if (data == "姓名密码不能为空"){
+                        alert('更改失败');
+                        $('#errorchangemsg').text(data);
+                    }else{
+                        arg = JSON.parse(data);
+                        if (arg.status){
+                            location.reload();
+                        }else {
+                            alert(arg.message)
+                        }
+                    }
+                }
+            })
+        }
+
+        function AjaxaddSend() {
+            $.ajax({
+                url: "./?token={{token}}&action=1",    //链接容易出错导致不能出现预期结果
+                type: "POST",
+                data: {
+                    'add_name':$('#addName').val(),
+                    'add_pwd':$('#addpwd').val()
+                },
+                success:function(data){
+                    if (data == "姓名密码不能为空"){
+                        alert('更改失败');
+                        $('#erroraddmsg').text(data);
+                    }else{
+                        arg = JSON.parse(data);
+                        if (arg.status){
+                            // location.href = "./";
+                            location.reload();
+                        }else {
+                            alert(arg.message)
+                        }
+                    }
+                }
+            })
+        }
+
+</script>
+</body>
+</html>

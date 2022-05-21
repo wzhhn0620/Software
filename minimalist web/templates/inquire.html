@@ -1,0 +1,291 @@
+<html>
+<head>
+    <title>Inquire</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: Monospace;
+            font-size: 13px;
+            line-height: 24px;
+            overscroll-behavior: none;
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color:yellow;
+        }
+
+        button {
+            width:160px;
+            cursor: pointer;
+            text-transform: uppercase;
+            background-color: #17c6de;
+            border-radius: 8px;
+            box-shadow:  20px 20px 40px #129caf,
+            -20px -20px 40px #1cf0ff;
+            border:none;
+            outline:none;
+            line-height: 40px;
+            margin-left: 50px;
+            margin-right: 50px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: linear-gradient(145deg, #15b2c8, #19d4ee);
+            box-shadow:  20px 20px 27px #14a8bd,
+                         -20px -20px 27px #1ae4ff;
+        }
+
+        #info {
+            position: absolute;
+            top: 0px;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            text-align: center;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1; /* TODO Solve this in HTML */
+        }
+
+        a, button, input, select {
+            pointer-events: auto;
+        }
+        .hide{
+            display: none;
+        }
+        .shadow{
+            position: fixed;    /*将位置固定*/
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: black;    /*背景颜色*/
+            opacity: 0.4;   /*透明度设置*/
+            z-index: 999;    /*设置显示层级，数值越大越靠上*/
+        }
+        .modal{
+            position: fixed;
+            z-index: 1000;   /*为了能在遮罩层上显示，只需要大1就可以*/
+            left: 50%;      /*对应左上角的原点*/
+            top: 50%;
+            height :500px;
+            width: 800px;
+            background-color: white;
+            margin-left: -390px;
+            margin-top: -250px;
+            border-radius: 64px;
+            background: #17c6de;
+            box-shadow:  17px 17px 34px #14a8bd,
+                         -17px -17px 34px #1ae4ff;
+        }
+        .h3_box{
+            text-align: center;
+            height: 60px;
+            /*line-height: 500px;*/
+            width:70%;
+            margin: auto;
+            margin-top: 32px;
+            margin-bottom: 60px; /*调节与下边框的距离*/
+            font: 20px "microsoft yahei",Helvetica,Tahoma,Arial,"Microsoft jhengHei",sans-serif;
+            color: #000000;
+            border-radius: 16px;
+            background: #17c6de;
+            box-shadow: inset 7px 7px 14px #14a8bd,
+                    inset -7px -7px 14px #1ae4ff;
+            /*height: 20px;*/
+            line-height: 60px;
+            /*padding:0 0 35px 0; */
+        }
+        .table_box{
+            height: 200px;
+            /*line-height: 500px;*/
+            width:70%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            text-align: center;
+            margin: auto;
+            color: #000000;
+            margin-top: 32px;
+            margin-bottom: 60px; /*调节与下边框的距离*/
+        }
+        .table_box::-webkit-scrollbar {
+            display: none;
+        }
+
+
+    </style>
+</head>
+<body>
+{% load static %}
+<div id="info">
+    <a onclick="showeditmodal();" style="text-decoration: none;"><button >Show Details</button></a>
+    <a onclick="showmodal();" style="text-decoration: none;"><button >Show Component</button></a>
+    <a href="../" style="text-decoration: none;"><button >ESC</button></a>
+</div>
+<div id="shadow" class="shadow hide"></div>
+<div id="editModal" class="modal hide">
+<!--        /*form表单提交页面会刷新*/-->
+    <h3 class="h3_box"><a onClick="hidemodal();">Access Log</a></h3>
+    <div class="table_box">
+         <table border="1" style="width: 100%;color: #000000;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>用户名</th>
+                    <th>元器件</th>
+                    <th>操作</th>
+                    <th>位置</th>
+                    <th>机器ID</th>
+                    <th>时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in users_components_list %}
+                    <tr>
+                        <td>{{ row.o_id }}</td>
+                        <td>{{ row.users }}</td>
+                        <td>{{ row.component }}</td>
+                        <td>{{ row.operate }}</td>
+                        <td>{{ row.position }}</td>
+                        <td>{{ row.robot }}</td>
+                        <td>{{ row.time }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div id="modal" class="modal hide">
+<!--        /*form表单提交页面会刷新*/-->
+    <h3 class="h3_box"><a onClick="hidemodal();">Component Log</a></h3>
+    <div class="table_box">
+         <table border="1" style="width: 100%;color: #000000;">
+            <thead>
+                <tr>
+                    <th>元器件名</th>
+                    <th>库存</th>
+                    <th>位置</th>
+                    <th>层数</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in components_list %}
+                    <tr>
+                        <td>{{ row.name }}</td>
+                        <td>{{ row.inventory }}</td>
+                        <td>{{ row.position }}</td>
+                        <td>{{ row.floor }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script src="{% static 'cite/jquery/jquery.js' %}"></script>
+<script src="{% static 'inquire_js/three.js' %}"></script>
+<script src="{% static 'inquire_js/GLTFLoader.js' %}"></script>
+<script src="{% static 'inquire_js/OrbitControls.js' %}"></script>
+<script>
+
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setClearColor(0x17c6de);
+    document.body.appendChild( renderer.domElement );
+
+    // 加载底板
+    const loader = new THREE.GLTFLoader();
+    loader.load(
+        '/static/model/floor.gltf',
+        function ( gltf ) {
+            scene.add( gltf.scene );
+            scene.add( new THREE.AmbientLight( 0x443333 ) );
+
+            const dirLight1 = new THREE.DirectionalLight( 0xffddcc, 1 );
+            dirLight1.position.set( 1, 0.75, 0.5 );
+            scene.add( dirLight1 );
+
+            const dirLight2 = new THREE.DirectionalLight( 0xccccff, 1 );
+            dirLight2.position.set( - 1, 0.75, - 0.5 );
+            scene.add( dirLight2 );
+            scene.add( light );
+            renderer.render(scene, camera);
+        },
+        function (xhr){
+            console.log((xhr.loaded / xhr.total*100) + '% loaded');
+        },
+        function ( error ) {
+
+            console.error( error );
+
+        } );
+
+
+    // //加载盒子函数
+    // function loadGLTF(i) {
+    //     const loader = new GLTFLoader();
+    //     loader.load('./model/box_'+i+'.gltf',
+    //         function (gltf) {
+    //             let object = gltf.scene;
+    //             object.name = 'box_'+i;
+    //             scene.add(object);
+    //             renderer.render(scene, camera);
+    //         },
+    //         function ( error ) {
+    //             console.error( error );
+    //         }
+    //     );
+    // }
+    //
+    // loadGLTF('1');loadGLTF('2');loadGLTF('3');loadGLTF('4');loadGLTF('5');
+
+    // camera.position.z = 0.2;
+    camera.position.y = 1.4;
+
+    const controls = new THREE.OrbitControls( camera, renderer.domElement );
+    controls.update();
+
+    function animate() {
+        controls.update();
+        requestAnimationFrame( animate );
+        renderer.render( scene, camera );
+    }
+    animate();
+</script>
+<script>
+        function showmodal(){
+            document.getElementById('shadow').classList.remove('hide');
+            document.getElementById('modal').classList.remove('hide');
+        }
+
+        function showeditmodal(){
+            document.getElementById('shadow').classList.remove('hide');
+            document.getElementById('editModal').classList.remove('hide');
+        }
+
+
+        function hidemodal(){
+            document.getElementById('shadow').classList.add('hide');
+            document.getElementById('editModal').classList.add('hide');
+            document.getElementById('modal').classList.add('hide');
+        }
+
+    </script>
+</body>
+</html>
+

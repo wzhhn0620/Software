@@ -1,0 +1,212 @@
+/* Header */
+/*背景图片*/
+body{
+/*    background:url("/static/userlogin_img/background.png");*/
+    background-color:#17c6de;
+}
+.h1_box{
+    align:center;
+    margin:auto;
+    margin-top:50px;
+    color: #000000;
+    font-size: 24px;
+    line-height: 100px;
+    width:70%;
+    margin-bottom: 180px;
+    text-align: center;
+    border-radius: 24px;
+    background: #17c6de;
+    box-shadow:  20px 20px 40px #129caf,
+     -20px -20px 40px #1cf0ff;
+}
+.h1_box:hover{
+    box-shadow: inset 7px 7px 16px #14a8bd,
+            inset -7px -7px 16px #1ae4ff;
+}
+.h1_box a{
+    color: #000000;
+    font-size: 24px;
+    text-decoration:none;
+}
+/*框的大小位置设置*/
+.logo_box_1{
+	width: 400px;
+	height: 400px;
+	padding: 40px;
+	/*background: rgba(50,0,80,0.8);*/
+	color: #EEE;
+	position: absolute;
+	left: 70%;
+	top:50%;
+	margin-left: -250px;
+	margin-top: -180px;
+	border-radius: 48px;
+    background: linear-gradient(145deg, #15b2c8, #19d4ee);
+    box-shadow:  20px 20px 40px #129caf,
+             -20px -20px 40px #1cf0ff;
+}
+.logo_box_2{
+	width: 400px;
+	height: 400px;
+	padding: 40px;
+	/*background: rgba(50,0,80,0.8);*/
+	color: #EEE;
+	position: absolute;
+	left: 31.5%;
+	top:50%;
+	margin-left: -250px;
+	margin-top: -180px;
+	border-radius: 48px;
+    background: linear-gradient(145deg, #19d4ee, #15b2c8);
+    box-shadow:  20px 20px 40px #129caf,
+             -20px -20px 40px #1cf0ff;
+}
+.h3_box{
+	text-align: center;
+	height: 60px;
+	/*line-height: 500px;*/
+	width:70%;
+	margin: auto;
+    margin-top: 32px;
+	margin-bottom: 40px; /*调节与下边框的距离*/
+	font: 20px "microsoft yahei",Helvetica,Tahoma,Arial,"Microsoft jhengHei",sans-serif;
+	color: #000000;
+    border-radius: 16px;
+    background: #17c6de;
+    box-shadow: inset 7px 7px 14px #14a8bd,
+            inset -7px -7px 14px #1ae4ff;
+	/*height: 20px;*/
+	line-height: 60px;
+	/*padding:0 0 35px 0; */
+}
+.logon_inof{
+	width: 100%;
+	min-height: 450px;
+	padding-top: 35px;
+	position: relative;
+}
+/*输入框的背景颜色*/
+button,select{
+    background:transparent;
+    border:none;
+    outline:none;
+}
+.select_box{
+	text-align: center;
+	height: 120px;
+	width:70%;
+	margin: auto;
+	margin-top: 32px;
+	margin-bottom: 30px; /*调节与下边框的距离*/
+	font: 32px;
+	color: #000000;
+    border-radius: 16px;
+    background: #17c6de;
+    box-shadow: inset 7px 7px 14px #14a8bd,
+            inset -7px -7px 14px #1ae4ff;
+	/*height: 20px;*/
+	line-height: 60px;
+}
+.table_box{
+    height: 250px;
+    /*line-height: 500px;*/
+    width:70%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    text-align: center;
+    margin: auto;
+    color: #000000;
+    margin-top: 32px;
+    margin-bottom: 60px; /*调节与下边框的距离*/
+}
+/*不显示下拉框却能实现下拉*/
+.table_box::-webkit-scrollbar {
+            display: none;
+}
+
+.shadow{
+    position: fixed;    /*将位置固定*/
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: black;    /*背景颜色*/
+    opacity: 0.4;   /*透明度设置*/
+    z-index: 999;    /*设置显示层级，数值越大越靠上*/
+}
+.modal{
+    position: fixed;
+    z-index: 1000;   /*为了能在遮罩层上显示，只需要大1就可以*/
+    left: 50%;      /*对应左上角的原点*/
+    top: 50%;
+    height :400px;
+    width: 400px;
+    background-color: white;
+    margin-left: -200px;
+    margin-top: -200px;
+    border-radius: 64px;
+    background: #17c6de;
+    box-shadow:  17px 17px 34px #14a8bd,
+                 -17px -17px 34px #1ae4ff;
+}
+.hide{
+    display: none;
+}
+a:hover {
+    color:yellow;
+}
+.input_outer{
+	height: 45px;
+	width: 50%;
+	margin: auto;
+	border-bottom: 1px solid #000;
+	margin-bottom: 40px;
+	position: relative;
+}
+.input_outer input{
+	width: 100%;
+	height: 100%;
+	background: #17c6de;
+	color: #000;
+	padding-top: 20px;
+	box-sizing: border-box;
+	border-radius: 4px;
+background: #17c6de;
+    box-shadow: inset 7px 7px 14px #14a8bd,
+            inset -7px -7px 14px #1ae4ff;
+}
+.input_button{
+    line-height: 40px;
+    width:30%;
+    margin:auto;
+    text-align: center;
+    border-radius: 8px;
+    background: #17c6de;
+    box-shadow:  20px 20px 40px #129caf,
+     -20px -20px 40px #1cf0ff;
+}
+.input_button:hover{
+    box-shadow: inset 7px 7px 16px #14a8bd,
+    inset -7px -7px 16px #1ae4ff;
+}
+.input_outer input:-webkit-autofill,
+.input_outer input:-webkit-autofill:hover,
+.input_outer input:-webkit-autofill:focus,
+.input_outer input:-webkit-autofill:active {
+  -webkit-transition-delay: 99999s;
+  -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
+}
+.input_outer input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px transparent inset !important;
+}
+
+.input_outer input:focus+label,.input_outer input:valid+label{
+	top: 0px;
+	font-size: 12px;
+}
+.input_outer label{
+	position: absolute;
+	left: 0;
+	top: 12px;
+	transition: all 0.5s;
+}

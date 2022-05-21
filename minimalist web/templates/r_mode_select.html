@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+         body{
+            margin-top: 80px;
+            background-color:#17c6de;
+            background-size:100%;
+            font-family: Arial, Helvetica, sans-serif
+            font-size: 16px;
+        }
+        ul,h1,h2,h3,p{
+            margin: 0;
+        }
+        ul{
+            list-style: none;
+            padding-left: 0;
+        }
+        a{
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color:#f5f5f5;
+        }
+        /* 头部导航栏 */
+        #head{
+            width: 100%;
+            min-width: 1200px;
+            height: 44px;
+            background-color: rgba(0, 0, 0, 0.404);
+        }
+        nav{
+            width: 1200px;
+            height: 100%;
+            margin:0 auto;
+        }
+        nav>h1{
+            float: left;
+            width: 32px;
+            height: 100%;
+        }
+        nav>.nav-list{
+            float:right;
+            width: 800px;
+            height: 100%;
+        }
+        .nav-list li{
+            float: left;
+            width: 148px;
+            height: 100%;
+            line-height: 44px;
+            text-align: center;
+        }
+        .nav-list li+li{
+            margin-left: 15px;
+        }
+        .nav-list li>a:hover{
+            color: rgb(129, 167, 218);
+        }
+        .nav-list li:hover{
+            background-color: #555;
+        }
+        /* 头部导航栏结束 */
+        /* 主体部分 */
+        #main{
+            width: 80%;
+            height: 380px;
+            background-color: rgba(0,0,0,0);
+            margin:150px auto;
+            border-radius: 10px;
+<!--            border:1px solid #abcdab;-->
+        }
+        /* 头像 */
+        #main>.head-pic{
+            line-height: 120px;
+            width:100%;
+            margin-bottom: 100px;
+            text-align: center;
+            border-radius: 24px;
+            background: #17c6de;
+            box-shadow:  20px 20px 40px #129caf,
+             -20px -20px 40px #1cf0ff;
+        }
+        #main>.head-pic:hover{
+            box-shadow: inset 7px 7px 16px #14a8bd,
+            inset -7px -7px 16px #1ae4ff;
+        }
+        #main>h2,a{
+            color: #000000;
+            font-size: 24px;
+        }
+        #main>.list{
+            width: 100%;
+            height: 40px;
+            margin:2.5em auto;
+            border-radius: 8px;
+        }
+        .list>ul>li{
+            float: left;
+            width: 16%;
+            height: 100%;
+            background: #17c6de;
+            opacity: .8;
+            border-radius: 48px;
+            box-shadow:  20px 20px 40px #129caf,
+             -20px -20px 40px #1cf0ff;
+            text-align: center;
+            line-height: 200px;
+
+        }
+        .list>ul>li:hover{
+            border-radius: 48px;
+            background: #17c6de;
+            box-shadow: inset 20px 20px 40px #129caf,
+            inset -20px -20px 40px #1cf0ff;
+        }
+        .list>ul>li+li{
+            margin-left:9em;;
+        }
+        .list a{
+            color:#000;
+            font-size: 24px;
+        }
+        .list a:hover{
+            color:yellow;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div id="main">
+        <div class="head-pic">
+        <h2><a href="../">Material management system Mode Select (ESC)</a></h2>
+        </div>
+        <div class="list">
+            <ul>
+                <li>
+                    <a href="../deposit/?token={{token}}&user={{user}}">Deposit</a>
+                </li>
+                <li>
+                    <a href="../takeout/?token={{token}}&user={{user}}">Take Out</a>
+                </li>
+                <li>
+                    <a href="../inquire/?token={{token}}&user={{user}}">Inquire</a>
+                </li>
+                <li>
+                    <a href="../administration/?token={{token}}&user={{user}}">Administration</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

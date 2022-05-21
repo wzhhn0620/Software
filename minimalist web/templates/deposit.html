@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deposit</title>
+    <link rel="stylesheet" type="text/css" href="/static/deposit_css/deposit.css" />
+    <link href="/static/cite/fontawesome/font-awesome.css" rel="stylesheet">
+</head>
+<body>
+<div id="shadow" class="shadow hide"></div>
+<div id="Modal" class="modal hide">
+<!--        /*form表单提交页面会刷新*/-->
+    <div class="h3_box">
+        <h3>Please waiting</h3>
+        </div>
+    <div class="h3_box_2">
+        <h3 style="text-align: center;margin:auto;">Depositing</h3>
+        <h3 style="text-align: center;margin:auto;">**********</h3>
+        <h3 style="text-align: center;margin:auto;">**********</h3>
+        <h3 style="text-align: center;margin:auto;">**********</h3>
+    </div>
+</div>
+
+    <a href="../" style="text-decoration: none;"><div class="h1_box">Select Component (ESC)</div></a>
+    <div class="logo_box_1">
+        <div class="h3_box">
+            <h3>Existing Component</h3>
+            </div>
+            <form method="post" action="./deposit/?token={{ token }}&action=0&user={{ user }}">
+            <div class="select_box">
+                <select size="3" style="width:120px; margin-top: 36px;" name="sl_component">
+                    {% for row in components_list %}
+                        <option value="{{ row.c_id }}" >{{ row.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <center>
+                <button class="btn" type="submit" onclick="showprocmodal();">Confirm
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </center>
+        </form>
+    </div>
+    <div class="logo_box_2">
+        <div class="h3_box">
+            <h3>New Component</h3>
+        </div>
+        <form method="post" action="./deposit/?token={{ token }}&action=1&user={{ user }}">
+            <div class="input_outer">
+						<input name="new_component" type="text" required id="new_component">
+						<label for="text" style="color:#000">Component Name</label>
+            </div>
+            <center>
+                <button class="btn" type="submit" onclick="showprocmodal();">Confirm
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </center>
+        </form>
+</div>
+<!--    <form method="post" action="">-->
+<!--        <p>班级名称:<input type="text" name="title"/></p>-->
+<!--        <input type="submit" value="提交" />-->
+<!--    </form>-->
+<script src="/static/js/jquery.js"></script>
+<script>
+        function showprocmodal(){
+            document.getElementById('shadow').classList.remove('hide');
+            document.getElementById('Modal').classList.remove('hide');
+        }
+
+        function hideprocmodal(){
+            document.getElementById('shadow').classList.add('hide');
+            document.getElementById('Modal').classList.add('hide');
+        }
+
+    </script>
+</body>
+</html>

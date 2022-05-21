@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ch" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<title>Material management system login</title>
+<link rel="stylesheet" type="text/css" href="/static/userlogin_css/component.css" />
+</head>
+<body>
+		<div id="large-header" class="large-header">
+			<div class="logo_box">
+				<h3>Material management system Login</h3>
+				<form action="/userslogin/" name="f" method="post">
+					<div class="input_outer">
+						<input name="user" type="text" required id="user">
+						<label for="text" style="color:#000">UserName</label>
+					</div>
+					<div class="input_outer">
+						<input name="pwd" type="password" required id="pwd">
+						<label for="password" style="color:#000">Password</label>
+						<br/><br/>
+						{% if msg != '' %}
+							<span style="color:red">{{ msg }}</span>
+						{% endif %}
+					</div>
+					<button class="btn" type="submit">Submit
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

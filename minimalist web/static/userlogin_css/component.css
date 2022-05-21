@@ -1,0 +1,220 @@
+/* Header */
+/*背景图片*/
+body{
+/*    background:url("/static/userlogin_img/background.png");*/
+    background-color:#17c6de;
+}
+/*框的大小位置设置*/
+.logo_box{
+	width: 400px;
+	height: 364px;
+	padding: 40px;
+	/*background: rgba(50,0,80,0.8);*/
+	color: #EEE;
+	position: absolute;
+	left: 50%;
+	top:50%;
+	margin-left: -250px;
+	margin-top: -250px;
+	border-radius: 48px;
+    background: #17c6de;
+    box-shadow:  20px 20px 40px #129caf,
+                 -20px -20px 40px #1cf0ff;
+}
+.logo_box h3{
+	text-align: center;
+	height: 20px;
+	margin-bottom: 60px; /*调节与下边框的距离*/
+	font: 20px "microsoft yahei",Helvetica,Tahoma,Arial,"Microsoft jhengHei",sans-serif;
+	color: #000000;
+	/*height: 20px;*/
+	/*line-height: 20px;*/
+	/*padding:0 0 35px 0; */
+}
+.forms{
+	width: 280px;
+	height: 485px;
+}
+.logon_inof{
+	width: 100%;
+	min-height: 450px;
+	padding-top: 35px;
+	position: relative;
+}
+/*输入框的背景颜色*/
+input,button{
+    background:transparent;
+    border:none;
+    outline:none;
+}
+.input_outer{
+	height: 45px;
+	border-bottom: 1px solid #000;
+	margin-bottom: 40px;
+	position: relative;
+}
+.input_outer input{
+	width: 100%;
+	height: 100%;
+	color: #000;
+	padding-top: 20px;
+	box-sizing: border-box;
+}
+.input_outer input:-webkit-autofill,
+.input_outer input:-webkit-autofill:hover,
+.input_outer input:-webkit-autofill:focus,
+.input_outer input:-webkit-autofill:active {
+  -webkit-transition-delay: 99999s;
+  -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
+}
+.input_outer input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px transparent inset !important;
+}
+
+.input_outer input:focus+label,.input_outer input:valid+label{
+	top: 0px;
+	font-size: 12px;
+}
+.input_outer label{
+	position: absolute;
+	left: 0;
+	top: 12px;
+	transition: all 0.5s;
+}
+.btn{
+	padding:10px;
+	overflow: hidden;
+	margin-top: 30px;
+	color: #1a818e;
+	position: relative;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+.btn:hover{
+	background: #03a9f4;
+	border-radius: 5px;
+	color: #000;
+	box-shadow: 0 0 5px 0 #03a9f4,
+				0 0 25px 0 #03a9f4,
+				0 0 50px 0 #03a9f4,
+				0 0 100px 0 #03a9f4;
+}
+.btn>span{
+	position: absolute;
+}
+
+
+.btn>span:nth-child(1){
+	width: 100%;
+	height: 2px;
+	background:-webkit-linear-gradient(left,transparent,#03e9f4);
+	left: -100%;
+	top: 0px;
+	animation: line1 1s linear infinite;
+}
+@keyframes line1{
+	50%,100%{
+		left:100%
+	}
+}
+.btn>span:nth-child(2){
+	width: 2px;
+	height: 100%;
+	background:-webkit-linear-gradient(top,transparent,#03e9f4);
+	right: 0%;
+	top: -100%;
+	animation: line2 1s 0.25s linear infinite;
+}
+@keyframes line2{
+	50%,100%{
+		top:100%
+	}
+}
+.btn>span:nth-child(3){
+	width: 100%;
+	height: 2px;
+	background:-webkit-linear-gradient(left,#03e9f4,transparent);
+	left: 100%;
+	bottom: 0;
+	animation: line3 1s 0.5s linear infinite;
+}
+@keyframes line3{
+	50%,100%{
+		left:-100%
+	}
+}
+.btn>span:nth-child(4){
+	width: 2px;
+	height: 100%;
+	background:-webkit-linear-gradient(top,#03e9f4,transparent);
+	left: 0px;
+	top: 100%;
+	animation: line4 1s 0.75s linear infinite;
+}
+@keyframes line4{
+	50%,100%{
+		top:-100%
+	}
+}
+
+
+.u_user{
+	width: 25px;
+	height: 25px;
+	background: url(../img/login_ico.png);
+	background-position:  -125px 0;
+	position: absolute;
+	margin: 10px 13px;
+}
+.us_uer{
+	width: 25px;
+	height: 25px;
+	background-image: url(../img/login_ico.png);
+	background-position: -125px -34px;
+	position: absolute;
+	margin: 10px 13px;
+}
+.l-login{
+	position: absolute;
+	z-index: 1;
+	left: 50px;
+	top: 0;
+	height: 46px;
+	font: 14px "microsoft yahei",Helvetica,Tahoma,Arial,"Microsoft jhengHei";
+	line-height: 46px;
+}
+.text{
+	width: 220px;
+	height: 46px;
+	outline: none;
+	display: inline-block;
+	font: 14px "microsoft yahei",Helvetica,Tahoma,Arial,"Microsoft jhengHei";
+	margin-left: 50px;
+	border: none;
+	background: none;
+	line-height: 46px;
+}
+/*///*/
+.mb2{
+	margin-bottom: 20px
+}
+.mb2 a{
+	text-decoration: none;
+	outline: none;
+}
+.submit {
+	padding: 15px;
+	margin-top: 20px;
+	display: block;
+}
+.act-but{
+	line-height: 20px;
+	text-align: center;
+	font-size: 20px;
+	border-radius: 50px;
+	background: #0096e6;
+}
+
+#live2dcanvas {
+    border: 0 !important;
+}
